@@ -1,0 +1,3937 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Communication Service",
+		"description": "Communication Service",
+		"version": "2020-11-01-preview3"
+	},
+	"paths": {
+		"/offerings/phonenumbers/countries": {
+			"get": {
+				"tags": [
+					"Offerings PhoneNumber Plan"
+				],
+				"summary": "Gets a list of supported countries",
+				"operationId": "PhoneNumberAdministration_GetAllSupportedCountries",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "locale",
+						"description": "A language-locale pairing which will be used to localize the names of countries",
+						"type": "string",
+						"default": "en-US"
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhoneNumberCountries"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "countries"
+				},
+				"x-ms-examples": {
+					"Get countries": {
+						"$ref": "./examples/GetCountriesAsync.json"
+					}
+				}
+			}
+		},
+		"/offerings/phonenumbers/countries/{countryCode}/phoneplangroups": {
+			"get": {
+				"tags": [
+					"Offerings PhoneNumber Plan"
+				],
+				"summary": "Gets a list of phone plan groups for the given country",
+				"operationId": "PhoneNumberAdministration_GetPhonePlanGroups",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"description": "The ISO 3166-2 country code.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "locale",
+						"description": "A language-locale pairing which will be used to localize the names of countries",
+						"type": "string",
+						"default": "en-US"
+					},
+					{
+						"in": "query",
+						"name": "includeRateInformation",
+						"type": "boolean",
+						"default": false
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhonePlanGroups"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "phonePlanGroups"
+				},
+				"x-ms-examples": {
+					"Get plans": {
+						"$ref": "./examples/GetPhonePlanGroupsAsync.json"
+					}
+				}
+			}
+		},
+		"/offerings/phonenumbers/countries/{countryCode}/phoneplangroups/{phonePlanGroupId}/phoneplans": {
+			"get": {
+				"tags": [
+					"Offerings PhoneNumber Plan"
+				],
+				"summary": "Gets a list of phone plans for a phone plan group",
+				"operationId": "PhoneNumberAdministration_GetPhonePlans",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"description": "The ISO 3166-2 country code.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "phonePlanGroupId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "locale",
+						"description": "A language-locale pairing which will be used to localize the names of countries",
+						"type": "string",
+						"default": "en-US"
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhonePlansResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "phonePlans"
+				},
+				"x-ms-examples": {
+					"Get plans": {
+						"$ref": "./examples/GetPhonePlansAsync.json"
+					}
+				}
+			}
+		},
+		"/offerings/phonenumbers/countries/{countryCode}/phoneplangroups/{phonePlanGroupId}/phoneplans/{phonePlanId}/locationoptions": {
+			"get": {
+				"tags": [
+					"Offerings PhoneNumber Plan"
+				],
+				"summary": "Gets a list of location options for a phone plan",
+				"operationId": "PhoneNumberAdministration_GetPhonePlanLocationOptions",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "countryCode",
+						"description": "The ISO 3166-2 country code.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "phonePlanGroupId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "phonePlanId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "locale",
+						"description": "A language-locale pairing which will be used to localize the names of countries",
+						"type": "string",
+						"default": "en-US"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/LocationOptionsResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get plans": {
+						"$ref": "./examples/GetLocationOptionsAsync.json"
+					}
+				}
+			}
+		},
+		"/offerings/phonenumbers/countries/{countryCode}/areacodes": {
+			"post": {
+				"tags": [
+					"Offerings PhoneNumber Plan"
+				],
+				"summary": "Gets a list of the supported area codes",
+				"operationId": "PhoneNumberAdministration_GetAllAreaCodes",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "locationType",
+						"description": "The type of location information required by the plan.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "countryCode",
+						"description": "The ISO 3166-2 country code",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "phonePlanId",
+						"description": "The plan id from which to reservation area codes.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Location options for when location type is selection.",
+						"schema": {
+							"$ref": "#/definitions/LocationOptionsQueries"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AreaCodes"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get area codes": {
+						"$ref": "./examples/GetAreaCodesAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/phonenumbers": {
+			"get": {
+				"tags": [
+					"PhoneNumber"
+				],
+				"summary": "Gets the list of the acquired phone numbers.",
+				"operationId": "PhoneNumberAdministration_GetAllPhoneNumbers",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "locale",
+						"description": "A language-locale pairing which will be used to localize the names of countries",
+						"type": "string",
+						"default": "en-US"
+					},
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/AcquiredPhoneNumbers"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "phoneNumbers"
+				},
+				"x-ms-examples": {
+					"List acquired phone numbers": {
+						"$ref": "./examples/GetAcquiredPhoneNumbersAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/reservationes": {
+			"post": {
+				"tags": [
+					"PhoneNumber Reservation"
+				],
+				"summary": "Creates a phone number reservation",
+				"operationId": "PhoneNumberAdministration_CreateReservation",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Defines the reservation options",
+						"schema": {
+							"$ref": "#/definitions/CreateReservationOptions"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/CreateReservationResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Create reservation": {
+						"$ref": "./examples/CreateReservationAsync.json"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"PhoneNumber Reservation"
+				],
+				"summary": "Gets a list of all reservationes",
+				"operationId": "PhoneNumberAdministration_GetAllReservationes",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhoneNumberEntities"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "entities"
+				},
+				"x-ms-examples": {
+					"Get all reservationes": {
+						"$ref": "./examples/GetAllReservationesAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/reservationes/{reservationId}": {
+			"get": {
+				"tags": [
+					"PhoneNumber Reservation"
+				],
+				"summary": "Get reservation by reservation id",
+				"operationId": "PhoneNumberAdministration_GetReservationById",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "reservationId",
+						"description": "The reservation id to be reservationed for",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhoneNumberReservation"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get reservation by reservation id": {
+						"$ref": "./examples/GetReservationByIdAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/reservationes/{reservationId}/cancel": {
+			"post": {
+				"tags": [
+					"PhoneNumber Reservation"
+				],
+				"summary": "Cancels the reservation. This means existing numbers in the reservation will be made available.",
+				"operationId": "PhoneNumberAdministration_CancelReservation",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "reservationId",
+						"description": "The reservation id to be canceled",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"202": {
+						"description": "Success"
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Cancel phone number reservation": {
+						"$ref": "./examples/CancelReservationAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/reservationes/{reservationId}/purchase": {
+			"post": {
+				"tags": [
+					"PhoneNumber Reservation"
+				],
+				"summary": "Purchases the phone number reservation.",
+				"operationId": "PhoneNumberAdministration_PurchaseReservation",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "reservationId",
+						"description": "The reservation id to be purchased",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"202": {
+						"description": "Success"
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Purchase phone number reservation": {
+						"$ref": "./examples/PurchaseReservationAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/releases": {
+			"post": {
+				"tags": [
+					"PhoneNumber Release"
+				],
+				"summary": "Creates a release for the given phone numbers",
+				"operationId": "PhoneNumberAdministration_ReleasePhoneNumbers",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Config api Release request",
+						"schema": {
+							"$ref": "#/definitions/ReleaseRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/ReleaseResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get release": {
+						"$ref": "./examples/CreateReleaseAsync.json"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"PhoneNumber Release"
+				],
+				"summary": "Gets a list of all releases",
+				"operationId": "PhoneNumberAdministration_GetAllReleases",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "skip",
+						"description": "An optional parameter for how many entries to skip, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 0
+					},
+					{
+						"in": "query",
+						"name": "take",
+						"description": "An optional parameter for how many entries to return, for pagination purposes.",
+						"type": "integer",
+						"format": "int32",
+						"default": 100
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhoneNumberEntities"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "entities"
+				},
+				"x-ms-examples": {
+					"Get all releases": {
+						"$ref": "./examples/GetAllReleasesAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/releases/{releaseId}": {
+			"get": {
+				"tags": [
+					"PhoneNumber Release"
+				],
+				"summary": "Gets a release by a release id",
+				"operationId": "PhoneNumberAdministration_GetReleaseById",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "releaseId",
+						"description": "Represents the release id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/PhoneNumberRelease"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get release by id": {
+						"$ref": "./examples/GetReleaseByIdAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/capabilities": {
+			"post": {
+				"tags": [
+					"PhoneNumber UpdateCapabilities"
+				],
+				"summary": "Adds or removes phone number capabilities",
+				"operationId": "PhoneNumberAdministration_UpdateCapabilities",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/UpdateNumberCapabilitiesRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/UpdateNumberCapabilitiesResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Update number capabilities": {
+						"$ref": "./examples/UpdateNumberCapabilitiesAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/capabilities/{capabilitiesUpdateId}": {
+			"get": {
+				"tags": [
+					"PhoneNumber UpdateCapabilities"
+				],
+				"summary": "Get capabilities by capabilities update id.",
+				"operationId": "PhoneNumberAdministration_GetCapabilitiesUpdate",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "capabilitiesUpdateId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/UpdatePhoneNumberCapabilitiesResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get number capabilities update": {
+						"$ref": "./examples/GetNumberCapabilitiesUpdateAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/configuration": {
+			"post": {
+				"tags": [
+					"PhoneNumber Configuration"
+				],
+				"summary": "Endpoint for getting number configurations",
+				"operationId": "PhoneNumberAdministration_GetNumberConfiguration",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "The phone number whose configuration is to be fetched",
+						"schema": {
+							"$ref": "#/definitions/NumberConfigurationPhoneNumber"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/NumberConfigurationResponse"
+						}
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get number configuration for phone number": {
+						"$ref": "./examples/GetNumberConfigurationAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/numberconfiguration/configure": {
+			"patch": {
+				"tags": [
+					"PhoneNumber Configuration"
+				],
+				"summary": "Endpoint for configuring a pstn number",
+				"operationId": "PhoneNumberAdministration_ConfigureNumber",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Details of pstn number configuration of the given phoneNumber",
+						"schema": {
+							"$ref": "#/definitions/NumberConfiguration"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Configure phone number": {
+						"$ref": "./examples/ConfigurePhoneNumberAsync.json"
+					}
+				}
+			}
+		},
+		"/phonenumbers/numberconfiguration/unconfigure": {
+			"patch": {
+				"tags": [
+					"PhoneNumber Configuration"
+				],
+				"summary": "Endpoint for unconfiguring a pstn number by removing the configuration",
+				"operationId": "PhoneNumberAdministration_UnconfigureNumber",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "The phone number to un-configure",
+						"schema": {
+							"$ref": "#/definitions/NumberConfigurationPhoneNumber"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"default": {
+						"description": "Failure",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Unconfigure phone number": {
+						"$ref": "./examples/UnconfigurePhoneNumberAsync.json"
+					}
+				}
+			}
+		},
+		"/sms": {
+			"post": {
+				"tags": [
+					"Sms"
+				],
+				"summary": "Sends a SMS message from a phone number that belongs to the authenticated account.",
+				"operationId": "Sms_Send",
+				"x-ms-examples": {
+					"SuccessfulSend": {
+						"$ref": "./examples/send.json"
+					}
+				},
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "SendMessageRequest",
+						"description": "Represents the body of the send message request.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SendMessageRequest"
+						}
+					},
+					{
+						"name": "api-version",
+						"in": "query",
+						"description": "Version of API to invoke.",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "SMS message is successfully scheduled for sending.",
+						"schema": {
+							"$ref": "#/definitions/SendSmsResponse"
+						}
+					}
+				}
+			}
+		},
+		"/identities": {
+			"post": {
+				"tags": [
+					"Identity"
+				],
+				"summary": "Create a new identity.",
+				"operationId": "CommunicationIdentity_Create",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "api-version",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK - Returns the created identity.",
+						"schema": {
+							"$ref": "#/definitions/CommunicationIdentity"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Create Identity": {
+						"$ref": "./examples/CreateIdentity.json"
+					}
+				}
+			}
+		},
+		"/identities/{id}": {
+			"delete": {
+				"tags": [
+					"Identity"
+				],
+				"summary": "Delete the identity, revoke all tokens of the identity and delete all associated data.",
+				"operationId": "CommunicationIdentity_Delete",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "Identifier of the identity to be deleted.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "api-version",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Success"
+					}
+				},
+				"x-ms-examples": {
+					"Delete Identity": {
+						"$ref": "./examples/DeleteIdentity.json"
+					}
+				}
+			},
+			"patch": {
+				"tags": [
+					"Identity"
+				],
+				"summary": "Update an Identity.",
+				"operationId": "CommunicationIdentity_Update",
+				"consumes": [
+					"application/merge-patch+json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "Identifier of the identity.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "api-version",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "The properties of the identity to be updated.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CommunicationIdentityUpdateRequest"
+						}
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Success"
+					}
+				},
+				"x-ms-examples": {
+					"Update Identity": {
+						"$ref": "./examples/UpdateIdentity.json"
+					}
+				}
+			}
+		},
+		"/identities/{id}/token": {
+			"post": {
+				"tags": [
+					"Identity Token"
+				],
+				"summary": "Generate a new token for an identity.",
+				"operationId": "CommunicationIdentity_IssueToken",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "Identifier of the identity to issue token for.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "api-version",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Requesting scopes for the new token.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CommunicationTokenRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/CommunicationIdentityToken"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Issue Token": {
+						"$ref": "./examples/IssueToken.json"
+					}
+				}
+			}
+		},
+		"/chat/threads": {
+			"post": {
+				"tags": [
+					"Chat Thread"
+				],
+				"summary": "Creates a chat thread.",
+				"operationId": "CreateChatThread",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Request payload for creating a chat thread.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CreateChatThreadRequest"
+						}
+					}
+				],
+				"responses": {
+					"207": {
+						"description": "Multi status response, containing the status for the thread creation and the thread member addition operations.\r\nIf the thread was created successfully, `Location` header would contain the URL for the newly created thread.",
+						"schema": {
+							"$ref": "#/definitions/MultiStatusResponse"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Create chat thread": {
+						"$ref": "./examples/Threads_CreateChatThread.json"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"Chat Thread"
+				],
+				"summary": "Gets the list of chat threads of a user.",
+				"operationId": "ListChatThreads",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "maxPageSize",
+						"description": "The maximum number of chat threads returned per page.",
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"in": "query",
+						"name": "startTime",
+						"description": "The earliest point in time to get chat threads up to. The timestamp should be in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+						"type": "string",
+						"format": "date-time"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The action returns a `GetThreadsResponse` resource.",
+						"schema": {
+							"$ref": "#/definitions/ChatThreadsInfoCollection"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get threads with pagination (Max Page Size)": {
+						"$ref": "./examples/Threads_ListChatThreadsWithPageSize.json"
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "value"
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}": {
+			"patch": {
+				"tags": [
+					"Chat Thread"
+				],
+				"summary": "Updates a thread's properties.",
+				"operationId": "UpdateChatThread",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The id of the thread to update.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Request payload for updating a chat thread.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/UpdateChatThreadRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Thread was successfully updated."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Update chat thread topic": {
+						"$ref": "./examples/Threads_UpdateChatThreadTopic.json"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"Chat Thread"
+				],
+				"summary": "Gets a chat thread.",
+				"operationId": "GetChatThread",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to get.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The action returns a `Thread` resource.",
+						"schema": {
+							"$ref": "#/definitions/ChatThread"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get chat thread": {
+						"$ref": "./examples/Threads_GetChatThread.json"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Chat Thread"
+				],
+				"summary": "Deletes a thread.",
+				"operationId": "DeleteChatThread",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to delete.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Request successful."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Delete chat thread": {
+						"$ref": "./examples/Threads_DeleteChatThread.json"
+					}
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/members": {
+			"get": {
+				"tags": [
+					"Chat Thread Member"
+				],
+				"summary": "Gets the members of a thread.",
+				"operationId": "ListChatThreadMembers",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to get members for.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The action returns the members of a thread.",
+						"schema": {
+							"$ref": "#/definitions/ChatThreadMembersCollection"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get thread members": {
+						"$ref": "./examples/ThreadMembers_ListChatThreadMembers.json"
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "value"
+				}
+			},
+			"post": {
+				"tags": [
+					"Chat Thread Member"
+				],
+				"summary": "Adds thread members to a thread. If members already exist, no change occurs.",
+				"operationId": "AddChatThreadMembers",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Id of the thread to add members to.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Thread members to be added to the thread.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AddChatThreadMembersRequest"
+						}
+					}
+				],
+				"responses": {
+					"207": {
+						"description": "Multi status response, containing the status for the thread member addition operations."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Add thread members": {
+						"$ref": "./examples/ThreadMembers_AddChatThreadMembers.json"
+					}
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/members/{chatMemberId}": {
+			"delete": {
+				"tags": [
+					"Chat Thread Member"
+				],
+				"summary": "Remove a member from a thread.",
+				"operationId": "RemoveChatThreadMember",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to remove the member from.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "chatMemberId",
+						"description": "Id of the thread member to remove from the thread.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Request successful."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Remove thread member": {
+						"$ref": "./examples/ThreadMembers_RemoveChatThreadMember.json"
+					}
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/messages": {
+			"post": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Sends a message to a thread.",
+				"operationId": "SendChatMessage",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The thread id to send the message to.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Details of the message to send.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SendChatMessageRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Message sent, the `Location` header contains the URL for the newly sent message.",
+						"schema": {
+							"$ref": "#/definitions/SendChatMessageResult"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Send Message": {
+						"$ref": "./examples/Messages_SendChatMessage.json"
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Gets a list of messages from a thread.",
+				"operationId": "ListChatMessages",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The thread id of the message.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "query",
+						"name": "maxPageSize",
+						"description": "The maximum number of messages to be returned per page.",
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"in": "query",
+						"name": "startTime",
+						"description": "The earliest point in time to get messages up to. The timestamp should be in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+						"type": "string",
+						"format": "date-time"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"schema": {
+							"$ref": "#/definitions/ChatMessagesCollection"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get messages with pagination (max page size)": {
+						"$ref": "./examples/Messages_ListChatMessagesWithPageSize.json"
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "value"
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/messages/{chatMessageId}": {
+			"get": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Gets a message by id.",
+				"operationId": "GetChatMessage",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The thread id to which the message was sent.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "chatMessageId",
+						"description": "The message id.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The action returns a `Message` resource.",
+						"schema": {
+							"$ref": "#/definitions/ChatMessage"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get Message": {
+						"$ref": "./examples/Messages_GetChatMessage.json"
+					}
+				}
+			},
+			"patch": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Updates a message.",
+				"operationId": "UpdateChatMessage",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The thread id to which the message was sent.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "chatMessageId",
+						"description": "The message id.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Details of the request to update the message.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/UpdateChatMessageRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Message is successfully updated."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Update message content": {
+						"$ref": "./examples/Messages_UpdateChatMessage.json"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Deletes a message.",
+				"operationId": "DeleteChatMessage",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "The thread id to which the message was sent.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "chatMessageId",
+						"description": "The message id.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"204": {
+						"description": "Request successful."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Delete message": {
+						"$ref": "./examples/Messages_DeleteChatMessage.json"
+					}
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/typing": {
+			"post": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Posts a typing event to a thread, on behalf of a user.",
+				"operationId": "SendTypingNotification",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Id of the thread.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Post typing event to a thread": {
+						"$ref": "./examples/Messages_SendTypingNotification.json"
+					}
+				}
+			}
+		},
+		"/chat/threads/{chatThreadId}/readreceipts": {
+			"get": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Gets read receipts for a thread.",
+				"operationId": "ListChatReadReceipts",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to get the read receipts for.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Request successful. The action returns the requested `ReadReceipt` resources.",
+						"schema": {
+							"$ref": "#/definitions/ReadReceiptsCollection"
+						}
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Get thread read receipts": {
+						"$ref": "./examples/Conversations_ListChatReadReceipts.json"
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink",
+					"itemName": "value"
+				}
+			},
+			"post": {
+				"tags": [
+					"Chat Thread Message"
+				],
+				"summary": "Sends a read receipt event to a thread, on behalf of a user.",
+				"operationId": "SendChatReadReceipt",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "chatThreadId",
+						"description": "Thread id to send the read receipt event to.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Read receipt details.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SendReadReceiptRequest"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Request successful."
+					},
+					"401": {
+						"description": "Unauthorized",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"403": {
+						"description": "Forbidden",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"429": {
+						"description": "Too many requests",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					},
+					"503": {
+						"description": "Service unavailable",
+						"schema": {
+							"$ref": "#/definitions/Error"
+						},
+						"x-ms-error-response": true
+					}
+				},
+				"x-ms-examples": {
+					"Send read receipt": {
+						"$ref": "./examples/Conversations_SendChatReadReceipt.json"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"AcquiredPhoneNumber": {
+			"description": "Represents an acquired phone number.",
+			"required": [
+				"acquiredCapabilities",
+				"availableCapabilities",
+				"phoneNumber"
+			],
+			"type": "object",
+			"properties": {
+				"phoneNumber": {
+					"description": "String of the E.164 format of the phone number",
+					"type": "string"
+				},
+				"acquiredCapabilities": {
+					"description": "The set of all acquired capabilities of the phone number.",
+					"type": "array",
+					"items": {
+						"description": "Represents the capabilities of a phone number.",
+						"enum": [
+							"UserAssignment",
+							"FirstPartyVoiceAppAssignment",
+							"ConferenceAssignment",
+							"P2PSmsEnabled",
+							"Geographic",
+							"NonGeographic",
+							"TollCalling",
+							"TollFreeCalling",
+							"Premium",
+							"P2PSmsCapable",
+							"A2PSmsCapable",
+							"A2PSmsEnabled",
+							"Calling",
+							"TollFree",
+							"FirstPartyAppAssignment",
+							"ThirdPartyAppAssignment",
+							"Azure",
+							"Office365",
+							"InboundCalling",
+							"OutboundCalling",
+							"InboundA2PSms",
+							"OutboundA2PSms",
+							"InboundP2PSms",
+							"OutboundP2PSms"
+						],
+						"type": "string",
+						"x-ms-enum": {
+							"name": "Capability",
+							"modelAsString": true
+						}
+					}
+				},
+				"availableCapabilities": {
+					"description": "The set of all available capabilities that can be acquired for this phone number.",
+					"type": "array",
+					"items": {
+						"description": "Represents the capabilities of a phone number.",
+						"enum": [
+							"UserAssignment",
+							"FirstPartyVoiceAppAssignment",
+							"ConferenceAssignment",
+							"P2PSmsEnabled",
+							"Geographic",
+							"NonGeographic",
+							"TollCalling",
+							"TollFreeCalling",
+							"Premium",
+							"P2PSmsCapable",
+							"A2PSmsCapable",
+							"A2PSmsEnabled",
+							"Calling",
+							"TollFree",
+							"FirstPartyAppAssignment",
+							"ThirdPartyAppAssignment",
+							"Azure",
+							"Office365",
+							"InboundCalling",
+							"OutboundCalling",
+							"InboundA2PSms",
+							"OutboundA2PSms",
+							"InboundP2PSms",
+							"OutboundP2PSms"
+						],
+						"type": "string",
+						"x-ms-enum": {
+							"name": "Capability",
+							"modelAsString": true
+						}
+					}
+				},
+				"assignmentStatus": {
+					"description": "The assignment status of the phone number. Conveys what type of entity the number is assigned to.",
+					"enum": [
+						"Unassigned",
+						"Unknown",
+						"UserAssigned",
+						"ConferenceAssigned",
+						"FirstPartyAppAssigned",
+						"ThirdPartyAppAssigned"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "AssignmentStatus",
+						"modelAsString": true
+					}
+				},
+				"placeName": {
+					"description": "The name of the place of the phone number.",
+					"type": "string"
+				},
+				"activationState": {
+					"description": "The activation state of the phone number. Can be \"Activated\", \"AssignmentPending\", \"AssignmentFailed\", \"UpdatePending\", \"UpdateFailed\"",
+					"enum": [
+						"Activated",
+						"AssignmentPending",
+						"AssignmentFailed",
+						"UpdatePending",
+						"UpdateFailed"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "ActivationState",
+						"modelAsString": true
+					}
+				}
+			}
+		},
+		"AcquiredPhoneNumbers": {
+			"description": "A wrapper of list of phone numbers",
+			"type": "object",
+			"properties": {
+				"phoneNumbers": {
+					"description": "Represents a list of phone numbers",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AcquiredPhoneNumber"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"ErrorBody": {
+			"description": "Represents a service error response body.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "The error code in the error response.",
+					"type": "string"
+				},
+				"message": {
+					"description": "The error message in the error response.",
+					"type": "string"
+				}
+			}
+		},
+		"ErrorResponse": {
+			"description": "Represents a service error response.",
+			"type": "object",
+			"properties": {
+				"error": {
+					"$ref": "#/definitions/ErrorBody"
+				}
+			}
+		},
+		"LocationOptionsQuery": {
+			"description": "Represents a location options parameter, used for fetching area codes.",
+			"type": "object",
+			"properties": {
+				"labelId": {
+					"description": "Represents the location option label id, returned from the GetLocationOptions API.",
+					"type": "string"
+				},
+				"optionsValue": {
+					"description": "Represents the location options value, returned from the GetLocationOptions API.",
+					"type": "string"
+				}
+			}
+		},
+		"LocationOptionsQueries": {
+			"description": "Represents a list of location option queries, used for fetching area codes.",
+			"type": "object",
+			"properties": {
+				"locationOptions": {
+					"description": "Represents the underlying list of countries.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LocationOptionsQuery"
+					}
+				}
+			}
+		},
+		"AreaCodes": {
+			"description": "Represents a list of area codes.",
+			"type": "object",
+			"properties": {
+				"primaryAreaCodes": {
+					"description": "Represents the list of primary area codes.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"secondaryAreaCodes": {
+					"description": "Represents the list of secondary area codes.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"NumberUpdateCapabilities": {
+			"description": "Represents an individual number capabilities update request",
+			"type": "object",
+			"properties": {
+				"add": {
+					"description": "Capabilities to be added to a phone number",
+					"type": "array",
+					"items": {
+						"description": "Represents the capabilities of a phone number.",
+						"enum": [
+							"UserAssignment",
+							"FirstPartyVoiceAppAssignment",
+							"ConferenceAssignment",
+							"P2PSmsEnabled",
+							"Geographic",
+							"NonGeographic",
+							"TollCalling",
+							"TollFreeCalling",
+							"Premium",
+							"P2PSmsCapable",
+							"A2PSmsCapable",
+							"A2PSmsEnabled",
+							"Calling",
+							"TollFree",
+							"FirstPartyAppAssignment",
+							"ThirdPartyAppAssignment",
+							"Azure",
+							"Office365",
+							"InboundCalling",
+							"OutboundCalling",
+							"InboundA2PSms",
+							"OutboundA2PSms",
+							"InboundP2PSms",
+							"OutboundP2PSms"
+						],
+						"type": "string",
+						"x-ms-enum": {
+							"name": "Capability",
+							"modelAsString": true
+						}
+					}
+				},
+				"remove": {
+					"description": "Capabilities to be removed from a phone number",
+					"type": "array",
+					"items": {
+						"description": "Represents the capabilities of a phone number.",
+						"enum": [
+							"UserAssignment",
+							"FirstPartyVoiceAppAssignment",
+							"ConferenceAssignment",
+							"P2PSmsEnabled",
+							"Geographic",
+							"NonGeographic",
+							"TollCalling",
+							"TollFreeCalling",
+							"Premium",
+							"P2PSmsCapable",
+							"A2PSmsCapable",
+							"A2PSmsEnabled",
+							"Calling",
+							"TollFree",
+							"FirstPartyAppAssignment",
+							"ThirdPartyAppAssignment",
+							"Azure",
+							"Office365",
+							"InboundCalling",
+							"OutboundCalling",
+							"InboundA2PSms",
+							"OutboundA2PSms",
+							"InboundP2PSms",
+							"OutboundP2PSms"
+						],
+						"type": "string",
+						"x-ms-enum": {
+							"name": "Capability",
+							"modelAsString": true
+						}
+					}
+				}
+			}
+		},
+		"UpdatePhoneNumberCapabilitiesResponse": {
+			"description": "Response for getting a phone number update capabilities.",
+			"type": "object",
+			"properties": {
+				"capabilitiesUpdateId": {
+					"description": "The id of the phone number capabilities update",
+					"type": "string"
+				},
+				"createdAt": {
+					"format": "date-time",
+					"description": "The time the capabilities update was created",
+					"type": "string"
+				},
+				"capabilitiesUpdateStatus": {
+					"description": "Status of the capabilities update.",
+					"enum": [
+						"Pending",
+						"InProgress",
+						"Complete",
+						"Error"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "CapabilitiesUpdateStatus",
+						"modelAsString": true
+					}
+				},
+				"phoneNumberCapabilitiesUpdates": {
+					"description": "The capabilities update for each of a set of phone numbers.",
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/NumberUpdateCapabilities"
+					}
+				}
+			}
+		},
+		"UpdateNumberCapabilitiesRequest": {
+			"description": "Represents a numbers capabilities update request",
+			"required": [
+				"phoneNumberCapabilitiesUpdate"
+			],
+			"type": "object",
+			"properties": {
+				"phoneNumberCapabilitiesUpdate": {
+					"description": "The map of phone numbers to the capabilities update applied to the phone number.",
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/NumberUpdateCapabilities"
+					}
+				}
+			}
+		},
+		"UpdateNumberCapabilitiesResponse": {
+			"description": "Represents a number capability update response.",
+			"required": [
+				"capabilitiesUpdateId"
+			],
+			"type": "object",
+			"properties": {
+				"capabilitiesUpdateId": {
+					"description": "The capabilities id",
+					"type": "string"
+				}
+			}
+		},
+		"PhoneNumberCountry": {
+			"description": "Represents a country.",
+			"required": [
+				"countryCode",
+				"localizedName"
+			],
+			"type": "object",
+			"properties": {
+				"localizedName": {
+					"description": "Represents the name of the country.",
+					"type": "string"
+				},
+				"countryCode": {
+					"description": "Represents the abbreviated name of the country.",
+					"type": "string"
+				}
+			}
+		},
+		"PhoneNumberCountries": {
+			"description": "Represents a wrapper around a list of countries.",
+			"type": "object",
+			"properties": {
+				"countries": {
+					"description": "Represents the underlying list of countries.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PhoneNumberCountry"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"NumberConfigurationPhoneNumber": {
+			"description": "The phone number wrapper representing a number configuration request",
+			"required": [
+				"phoneNumber"
+			],
+			"type": "object",
+			"properties": {
+				"phoneNumber": {
+					"description": "The phone number in the E.164 format",
+					"type": "string"
+				}
+			}
+		},
+		"PstnConfiguration": {
+			"description": "Definition for pstn number configuration",
+			"required": [
+				"callbackUrl"
+			],
+			"type": "object",
+			"properties": {
+				"callbackUrl": {
+					"description": "The webhook URL on the phone number configuration.",
+					"type": "string"
+				},
+				"applicationId": {
+					"description": "The application id of the application to which to configure",
+					"type": "string"
+				}
+			}
+		},
+		"NumberConfigurationResponse": {
+			"description": "Definition for number configuration",
+			"required": [
+				"pstnConfiguration"
+			],
+			"type": "object",
+			"properties": {
+				"pstnConfiguration": {
+					"$ref": "#/definitions/PstnConfiguration"
+				}
+			}
+		},
+		"NumberConfiguration": {
+			"description": "Definition for number configuration",
+			"required": [
+				"phoneNumber",
+				"pstnConfiguration"
+			],
+			"type": "object",
+			"properties": {
+				"pstnConfiguration": {
+					"$ref": "#/definitions/PstnConfiguration"
+				},
+				"phoneNumber": {
+					"description": "The phone number to configure",
+					"type": "string"
+				}
+			}
+		},
+		"CarrierDetails": {
+			"description": "Represents carrier details.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "Name of carrier details",
+					"type": "string"
+				},
+				"localizedName": {
+					"description": "Display name of carrier details",
+					"type": "string"
+				}
+			}
+		},
+		"RateInformation": {
+			"description": "Represents a wrapper of rate information",
+			"type": "object",
+			"properties": {
+				"monthlyRate": {
+					"format": "double",
+					"description": "The monthly rate of a phone plan group",
+					"type": "number"
+				},
+				"currencyType": {
+					"description": "The currency of a phone plan group",
+					"enum": [
+						"USD"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "CurrencyType",
+						"modelAsString": true
+					}
+				},
+				"rateErrorMessage": {
+					"description": "The error code of a phone plan group",
+					"type": "string"
+				}
+			}
+		},
+		"PhonePlanGroup": {
+			"description": "Represents a plan group.",
+			"required": [
+				"localizedDescription",
+				"localizedName",
+				"phonePlanGroupId"
+			],
+			"type": "object",
+			"properties": {
+				"phonePlanGroupId": {
+					"description": "The id of the plan group",
+					"type": "string"
+				},
+				"phoneNumberType": {
+					"description": "The phone number type of the plan group",
+					"enum": [
+						"Unknown",
+						"Geographic",
+						"TollFree",
+						"Indirect"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "PhoneNumberType",
+						"modelAsString": true
+					}
+				},
+				"localizedName": {
+					"description": "The name of the plan group.",
+					"type": "string"
+				},
+				"localizedDescription": {
+					"description": "The description of the plan group.",
+					"type": "string"
+				},
+				"carrierDetails": {
+					"$ref": "#/definitions/CarrierDetails"
+				},
+				"rateInformation": {
+					"$ref": "#/definitions/RateInformation"
+				}
+			}
+		},
+		"PhonePlanGroups": {
+			"description": "Represents a wrapper of list of plan groups.",
+			"type": "object",
+			"properties": {
+				"phonePlanGroups": {
+					"description": "The underlying list of phone plan groups.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PhonePlanGroup"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"PhonePlan": {
+			"description": "Represents a phone plan.",
+			"required": [
+				"localizedName",
+				"locationType",
+				"phonePlanId"
+			],
+			"type": "object",
+			"properties": {
+				"phonePlanId": {
+					"description": "The phone plan id",
+					"type": "string"
+				},
+				"localizedName": {
+					"description": "The name of the phone plan",
+					"type": "string"
+				},
+				"locationType": {
+					"description": "The location type of the phone plan.",
+					"enum": [
+						"CivicAddress",
+						"NotRequired",
+						"Selection"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "LocationType",
+						"modelAsString": true
+					}
+				},
+				"areaCodes": {
+					"description": "The list of available area codes in the phone plan.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"capabilities": {
+					"description": "Capabilities of the phone plan.",
+					"type": "array",
+					"items": {
+						"description": "Represents the capabilities of a phone number.",
+						"enum": [
+							"UserAssignment",
+							"FirstPartyVoiceAppAssignment",
+							"ConferenceAssignment",
+							"P2PSmsEnabled",
+							"Geographic",
+							"NonGeographic",
+							"TollCalling",
+							"TollFreeCalling",
+							"Premium",
+							"P2PSmsCapable",
+							"A2PSmsCapable",
+							"A2PSmsEnabled",
+							"Calling",
+							"TollFree",
+							"FirstPartyAppAssignment",
+							"ThirdPartyAppAssignment",
+							"Azure",
+							"Office365",
+							"InboundCalling",
+							"OutboundCalling",
+							"InboundA2PSms",
+							"OutboundA2PSms",
+							"InboundP2PSms",
+							"OutboundP2PSms"
+						],
+						"type": "string",
+						"x-ms-enum": {
+							"name": "Capability",
+							"modelAsString": true
+						}
+					}
+				},
+				"maximumReservationSize": {
+					"format": "int32",
+					"description": "The maximum number of phone numbers one can acquire in a reservation in this phone plan.",
+					"type": "integer"
+				}
+			}
+		},
+		"PhonePlansResponse": {
+			"description": "Represents a wrapper around a list of countries.",
+			"type": "object",
+			"properties": {
+				"phonePlans": {
+					"description": "Represents the underlying list of phone plans.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PhonePlan"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"LocationOptionsDetails": {
+			"description": "Represents location options details.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "The name of the location options",
+					"type": "string"
+				},
+				"value": {
+					"description": "The abbreviated name of the location options",
+					"type": "string"
+				},
+				"locationOptions": {
+					"description": "The underlying location options",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LocationOptions"
+					}
+				}
+			}
+		},
+		"LocationOptions": {
+			"description": "Represents a location options.",
+			"type": "object",
+			"properties": {
+				"labelId": {
+					"description": "The label id of the location.",
+					"type": "string"
+				},
+				"labelName": {
+					"description": "The display name of the location.",
+					"type": "string"
+				},
+				"options": {
+					"description": "The underlying location option details.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LocationOptionsDetails"
+					}
+				}
+			}
+		},
+		"LocationOptionsResponse": {
+			"description": "Represents a wrapper around a list of location options.",
+			"type": "object",
+			"properties": {
+				"locationOptions": {
+					"$ref": "#/definitions/LocationOptions"
+				}
+			}
+		},
+		"PhoneNumberReleaseDetails": {
+			"type": "object",
+			"properties": {
+				"status": {
+					"description": "The release status of a phone number.",
+					"enum": [
+						"Pending",
+						"Success",
+						"Error",
+						"InProgress"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "PhoneNumberReleaseStatus",
+						"modelAsString": true
+					}
+				},
+				"errorCode": {
+					"format": "int32",
+					"description": "The error code in the case the status is error.",
+					"type": "integer"
+				}
+			}
+		},
+		"PhoneNumberRelease": {
+			"description": "Represents a release",
+			"type": "object",
+			"properties": {
+				"releaseId": {
+					"description": "The id of the release.",
+					"type": "string"
+				},
+				"createdAt": {
+					"format": "date-time",
+					"description": "The creation time of the release.",
+					"type": "string"
+				},
+				"status": {
+					"description": "The release status.",
+					"enum": [
+						"Pending",
+						"InProgress",
+						"Complete",
+						"Failed",
+						"Expired"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "ReleaseStatus",
+						"modelAsString": true
+					}
+				},
+				"errorMessage": {
+					"description": "The underlying error message of a release.",
+					"type": "string"
+				},
+				"phoneNumberReleaseStatusDetails": {
+					"description": "The list of phone numbers in the release, mapped to its individual statuses.",
+					"type": "object",
+					"additionalProperties": {
+						"$ref": "#/definitions/PhoneNumberReleaseDetails"
+					}
+				}
+			}
+		},
+		"ReleaseRequest": {
+			"description": "Represents a release request.",
+			"required": [
+				"phoneNumbers"
+			],
+			"type": "object",
+			"properties": {
+				"phoneNumbers": {
+					"description": "The list of phone numbers in the release request.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"ReleaseResponse": {
+			"description": "Represents a release response.",
+			"required": [
+				"releaseId"
+			],
+			"type": "object",
+			"properties": {
+				"releaseId": {
+					"description": "The release id of a created release.",
+					"type": "string"
+				}
+			}
+		},
+		"PhoneNumberEntity": {
+			"description": "Represents a phone number entity, as part of the response when calling get all reservationes or releases.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The id of the entity. It is the reservation id of a reservation. It is the release id of a release.",
+					"type": "string"
+				},
+				"createdAt": {
+					"format": "date-time",
+					"description": "Date and time the entity is created.",
+					"type": "string"
+				},
+				"displayName": {
+					"description": "Name of the entity.",
+					"type": "string"
+				},
+				"quantity": {
+					"format": "int32",
+					"description": "Quantity of requested phone numbers in the entity.",
+					"type": "integer"
+				},
+				"quantityObtained": {
+					"format": "int32",
+					"description": "Quantity of acquired phone numbers in the entity.",
+					"type": "integer"
+				},
+				"status": {
+					"description": "Status of the entity.",
+					"type": "string"
+				},
+				"focDate": {
+					"format": "date-time",
+					"description": "The Firm Order Confirmation date of the phone number entity.",
+					"type": "string"
+				}
+			}
+		},
+		"PhoneNumberEntities": {
+			"description": "Represents a list of reservationes or releases, as part of the response when fetching all reservationes or releases.",
+			"type": "object",
+			"properties": {
+				"entities": {
+					"description": "The underlying list of entities.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PhoneNumberEntity"
+					}
+				},
+				"nextLink": {
+					"description": "Represents the URL link to the next page",
+					"type": "string"
+				}
+			}
+		},
+		"PhoneNumberReservation": {
+			"description": "Represents a phone number reservation",
+			"type": "object",
+			"properties": {
+				"reservationId": {
+					"description": "The id of the reservation.",
+					"type": "string"
+				},
+				"displayName": {
+					"description": "The name of the reservation.",
+					"type": "string"
+				},
+				"createdAt": {
+					"format": "date-time",
+					"description": "The creation time of the reservation.",
+					"type": "string"
+				},
+				"description": {
+					"description": "The description of the reservation.",
+					"type": "string"
+				},
+				"phonePlanIds": {
+					"description": "The phone plan ids of the reservation.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"areaCode": {
+					"description": "The area code of the reservation.",
+					"type": "string"
+				},
+				"quantity": {
+					"format": "int32",
+					"description": "The quantity of phone numbers in the reservation.",
+					"type": "integer"
+				},
+				"locationOptions": {
+					"description": "The location options of the reservation.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LocationOptionsDetails"
+					}
+				},
+				"status": {
+					"description": "The status of the reservation.",
+					"enum": [
+						"Pending",
+						"InProgress",
+						"Reserved",
+						"Expired",
+						"Expiring",
+						"Completing",
+						"Refreshing",
+						"Success",
+						"Manual",
+						"Cancelled",
+						"Cancelling",
+						"Error",
+						"PurchasePending"
+					],
+					"type": "string",
+					"x-ms-enum": {
+						"name": "ReservationStatus",
+						"modelAsString": true
+					}
+				},
+				"phoneNumbers": {
+					"description": "The list of phone numbers in the reservation, in the case the status is reserved or success.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"reservationExpiryDate": {
+					"format": "date-time",
+					"description": "The date that reservation expires and the numbers become available.",
+					"type": "string"
+				},
+				"errorCode": {
+					"format": "int32",
+					"description": "The error code of the reservation.",
+					"type": "integer"
+				}
+			}
+		},
+		"CreateReservationOptions": {
+			"description": "Represents a reservation creation option.",
+			"required": [
+				"areaCode",
+				"description",
+				"displayName",
+				"phonePlanIds"
+			],
+			"type": "object",
+			"properties": {
+				"displayName": {
+					"description": "Display name of the reservation.",
+					"maxLength": 255,
+					"type": "string"
+				},
+				"description": {
+					"description": "Description of the reservation.",
+					"maxLength": 255,
+					"type": "string"
+				},
+				"phonePlanIds": {
+					"description": "The plan subtype ids from which to create the reservation.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"areaCode": {
+					"description": "The area code from which to create the reservation.",
+					"type": "string"
+				},
+				"quantity": {
+					"format": "int32",
+					"description": "The quantity of phone numbers to request.",
+					"maximum": 2147483647,
+					"minimum": 1,
+					"type": "integer"
+				},
+				"locationOptions": {
+					"description": "The location options of the reservation.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LocationOptionsDetails"
+					}
+				}
+			}
+		},
+		"CreateReservationResponse": {
+			"description": "Represents a reservation creation response.",
+			"required": [
+				"reservationId"
+			],
+			"type": "object",
+			"properties": {
+				"reservationId": {
+					"description": "The reservation id of the reservation that was created.",
+					"type": "string"
+				}
+			}
+		},
+		"ReadReceipt": {
+			"description": "A read receipt indicates the time a chat message was read by a recipient.",
+			"type": "object",
+			"properties": {
+				"senderId": {
+					"description": "Read receipt sender id.",
+					"type": "string",
+					"readOnly": true,
+					"example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+				},
+				"chatMessageId": {
+					"description": "Id for the chat message that has been read. This id is generated by the server.",
+					"type": "string",
+					"readOnly": true,
+					"example": "1591137790240"
+				},
+				"readOn": {
+					"format": "date-time",
+					"description": "Read receipt timestamp. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"readOnly": true,
+					"example": "2020-10-30T10:50:50Z"
+				}
+			}
+		},
+		"ReadReceiptsCollection": {
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Collection of read receipts.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ReadReceipt"
+					},
+					"readOnly": true
+				},
+				"nextLink": {
+					"description": "If there are more read receipts that can be retrieved, the next link will be populated.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"Error": {
+			"type": "object",
+			"properties": {
+				"code": {
+					"type": "string",
+					"readOnly": true
+				},
+				"message": {
+					"type": "string",
+					"readOnly": true
+				},
+				"target": {
+					"type": "string",
+					"readOnly": true
+				},
+				"innerErrors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Error"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"SendReadReceiptRequest": {
+			"description": "Request payload for sending a read receipt.",
+			"required": [
+				"chatMessageId"
+			],
+			"type": "object",
+			"properties": {
+				"chatMessageId": {
+					"description": "Id of the latest chat message read by the user.",
+					"type": "string",
+					"example": "1592435762364"
+				}
+			}
+		},
+		"ChatMessagePriority": {
+			"description": "The chat message priority.",
+			"enum": [
+				"Normal",
+				"High"
+			],
+			"type": "string",
+			"x-ms-enum": {
+				"name": "ChatMessagePriority",
+				"modelAsString": true
+			}
+		},
+		"SendChatMessageRequest": {
+			"description": "Details of the message to send.",
+			"required": [
+				"content"
+			],
+			"type": "object",
+			"properties": {
+				"priority": {
+					"$ref": "#/definitions/ChatMessagePriority"
+				},
+				"content": {
+					"description": "Chat message content.",
+					"type": "string",
+					"example": "Come one guys, lets go for lunch together."
+				},
+				"senderDisplayName": {
+					"description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
+					"type": "string",
+					"example": "Bob Admin"
+				}
+			}
+		},
+		"SendChatMessageResult": {
+			"description": "Result of the send message operation.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "A server-generated message id.",
+					"type": "string",
+					"readOnly": true,
+					"example": "123456789"
+				}
+			}
+		},
+		"ChatMessage": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The id of the chat message. This id is server generated.",
+					"type": "string",
+					"readOnly": true,
+					"example": "123456789"
+				},
+				"type": {
+					"description": "Type of the chat message.\r\n            \r\nPossible values:\r\n    - Text\r\n    - ThreadActivity/TopicUpdate\r\n    - ThreadActivity/AddMember\r\n    - ThreadActivity/DeleteMember",
+					"type": "string",
+					"example": "Text"
+				},
+				"priority": {
+					"$ref": "#/definitions/ChatMessagePriority"
+				},
+				"version": {
+					"description": "Version of the chat message.",
+					"type": "string",
+					"readOnly": true
+				},
+				"content": {
+					"description": "Content of the chat message.",
+					"type": "string",
+					"example": "Come one guys, lets go for lunch together."
+				},
+				"senderDisplayName": {
+					"description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
+					"type": "string",
+					"example": "Jane"
+				},
+				"createdOn": {
+					"format": "date-time",
+					"description": "The timestamp when the chat message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"readOnly": true,
+					"example": "2020-10-30T10:50:50Z"
+				},
+				"senderId": {
+					"description": "The id of the chat message sender.",
+					"type": "string",
+					"readOnly": true,
+					"example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+				},
+				"deletedOn": {
+					"format": "date-time",
+					"description": "The timestamp when the chat message was deleted. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"example": "2020-10-30T10:50:50Z"
+				},
+				"editedOn": {
+					"format": "date-time",
+					"description": "The timestamp when the chat message was edited. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"example": "2020-10-30T10:50:50Z"
+				}
+			}
+		},
+		"ChatMessagesCollection": {
+			"description": "Collection of chat messages for a particular chat thread.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Collection of chat messages.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatMessage"
+					},
+					"readOnly": true
+				},
+				"nextLink": {
+					"description": "If there are more chat messages that can be retrieved, the next link will be populated.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"UpdateChatMessageRequest": {
+			"type": "object",
+			"properties": {
+				"content": {
+					"description": "Chat message content.",
+					"type": "string",
+					"example": "Let's go for lunch together."
+				},
+				"priority": {
+					"$ref": "#/definitions/ChatMessagePriority"
+				}
+			}
+		},
+		"ChatThreadMember": {
+			"description": "A member of the chat thread.",
+			"required": [
+				"id"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "The id of the chat thread member in the format `8:acs:ResourceId_AcsUserId`.",
+					"type": "string",
+					"example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+				},
+				"displayName": {
+					"description": "Display name for the chat thread member.",
+					"type": "string",
+					"example": "Bob"
+				},
+				"shareHistoryTime": {
+					"format": "date-time",
+					"description": "Time from which the chat history is shared with the member. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"example": "2020-10-30T10:50:50Z"
+				}
+			}
+		},
+		"ChatThreadMembersCollection": {
+			"description": "Collection of thread members belong to a particular thread.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Chat thread members.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatThreadMember"
+					}
+				},
+				"nextLink": {
+					"description": "If there are more chat threads that can be retrieved, the next link will be populated.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"AddChatThreadMembersRequest": {
+			"description": "Thread members to be added to the thread.",
+			"required": [
+				"members"
+			],
+			"type": "object",
+			"properties": {
+				"members": {
+					"description": "Members to add to a chat thread.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatThreadMember"
+					}
+				}
+			}
+		},
+		"CreateChatThreadRequest": {
+			"description": "Request payload for creating a chat thread.",
+			"required": [
+				"members",
+				"topic"
+			],
+			"type": "object",
+			"properties": {
+				"topic": {
+					"description": "The chat thread topic.",
+					"type": "string",
+					"example": "Lunch Thread"
+				},
+				"members": {
+					"description": "Members to be added to the chat thread.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatThreadMember"
+					}
+				}
+			}
+		},
+		"IndividualStatusResponse": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Identifies the resource to which the individual status corresponds.",
+					"type": "string",
+					"readOnly": true
+				},
+				"statusCode": {
+					"format": "int32",
+					"description": "The status code of the resource operation.\r\n            \r\nPossible values include:\r\n  200 for a successful update or delete,\r\n  201 for successful creation,\r\n  400 for a malformed input,\r\n  403 for lacking permission to execute the operation,\r\n  404 for resource not found.",
+					"type": "integer",
+					"readOnly": true
+				},
+				"message": {
+					"description": "The message explaining why the operation failed for the resource identified by the key; null if the operation succeeded.",
+					"type": "string",
+					"readOnly": true
+				},
+				"type": {
+					"description": "Identifies the type of the resource to which the individual status corresponds.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"MultiStatusResponse": {
+			"type": "object",
+			"properties": {
+				"multipleStatus": {
+					"description": "The list of status information for each resource in the request.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/IndividualStatusResponse"
+					},
+					"readOnly": true
+				}
+			}
+		},
+		"ChatThreadInfo": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Chat thread id.",
+					"type": "string",
+					"readOnly": true,
+					"example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
+				},
+				"topic": {
+					"description": "Chat thread topic.",
+					"type": "string",
+					"example": "Lunch Chat thread"
+				},
+				"isDeleted": {
+					"description": "Flag if a chat thread is soft deleted.",
+					"type": "boolean",
+					"example": false
+				},
+				"lastMessageReceivedOn": {
+					"format": "date-time",
+					"description": "The timestamp when the last message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"readOnly": true,
+					"example": "2020-10-30T10:50:50Z"
+				}
+			}
+		},
+		"ChatThreadsInfoCollection": {
+			"description": "Collection of chat threads.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Collection of chat threads.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatThreadInfo"
+					},
+					"readOnly": true
+				},
+				"nextLink": {
+					"description": "If there are more chat threads that can be retrieved, the next link will be populated.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"UpdateChatThreadRequest": {
+			"type": "object",
+			"properties": {
+				"topic": {
+					"description": "Chat thread topic.",
+					"type": "string",
+					"example": "Lunch Thread"
+				}
+			}
+		},
+		"ChatThread": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Chat thread id.",
+					"type": "string",
+					"readOnly": true,
+					"example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
+				},
+				"topic": {
+					"description": "Chat thread topic.",
+					"type": "string",
+					"example": "Lunch Chat thread"
+				},
+				"createdOn": {
+					"format": "date-time",
+					"description": "The timestamp when the chat thread was created. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+					"type": "string",
+					"readOnly": true,
+					"example": "2020-10-30T10:50:50Z"
+				},
+				"createdBy": {
+					"description": "Id of the chat thread owner.",
+					"type": "string",
+					"readOnly": true,
+					"example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+				},
+				"members": {
+					"description": "Chat thread members.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ChatThreadMember"
+					}
+				}
+			}
+		},
+		"CommunicationIdentity": {
+			"description": "A communication identity.",
+			"required": [
+				"id"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Identifier of the identity.",
+					"type": "string"
+				}
+			}
+		},
+		"CommunicationIdentityUpdateRequest": {
+			"type": "object",
+			"properties": {
+				"tokensValidFrom": {
+					"format": "date-time",
+					"description": "All tokens that are issued prior to this time will be revoked.",
+					"type": "string"
+				}
+			}
+		},
+		"CommunicationTokenRequest": {
+			"required": [
+				"scopes"
+			],
+			"type": "object",
+			"properties": {
+				"scopes": {
+					"description": "List of scopes attached to the token.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"CommunicationIdentityToken": {
+			"required": [
+				"expiresOn",
+				"id",
+				"token"
+			],
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Identifier of the identity owning the token.",
+					"type": "string"
+				},
+				"token": {
+					"description": "The token issued for the identity.",
+					"type": "string"
+				},
+				"expiresOn": {
+					"format": "date-time",
+					"description": "The expiry time of the token.",
+					"type": "string"
+				}
+			}
+		},
+		"SendSmsOptions": {
+			"description": "Optional configuration for sending SMS messages",
+			"type": "object",
+			"properties": {
+				"enableDeliveryReport": {
+					"description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid",
+					"type": "boolean"
+				}
+			}
+		},
+		"SendMessageRequest": {
+			"description": "Represents the properties of a send message request.",
+			"required": [
+				"message",
+				"to",
+				"from"
+			],
+			"type": "object",
+			"properties": {
+				"from": {
+					"description": "The sender's phone number in E.164 format that is owned by the authenticated account.",
+					"type": "string"
+				},
+				"to": {
+					"description": "The recipients' phone number in E.164 format. In this version, only one recipient in the list is supported.",
+					"maxLength": 1,
+					"minLength": 1,
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"message": {
+					"description": "The contents of the message that will be sent to the recipient. The allowable content is defined by RFC 5724.",
+					"maxLength": 2048,
+					"minLength": 0,
+					"type": "string"
+				},
+				"sendSmsOptions": {
+					"$ref": "#/definitions/SendSmsOptions"
+				}
+			}
+		},
+		"SendSmsResponse": {
+			"description": "Response for a successful send Sms request.",
+			"type": "object",
+			"properties": {
+				"messageId": {
+					"description": "The identifier of the outgoing SMS message",
+					"type": "string"
+				}
+			}
+		}
+	},
+	"parameters": {
+		"ApiVersionParameter": {
+			"in": "query",
+			"name": "api-version",
+			"description": "Version of API to invoke",
+			"required": true,
+			"type": "string"
+		},
+		"Endpoint": {
+			"in": "path",
+			"name": "endpoint",
+			"description": "The endpoint of the Azure Communication resource.",
+			"required": true,
+			"type": "string",
+			"x-ms-skip-url-encoding": true,
+			"x-ms-parameter-location": "client"
+		}
+	},
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"flow": "implicit",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			},
+			"description": "Azure Active Directory OAuth2 Flow"
+		}
+	},
+	"x-ms-parameterized-host": {
+		"hostTemplate": "{endpoint}",
+		"useSchemePrefix": false,
+		"parameters": [
+			{
+				"$ref": "#/parameters/Endpoint"
+			}
+		]
+	}
+}
